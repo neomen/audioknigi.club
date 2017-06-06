@@ -1,0 +1,21 @@
+{
+  "name": "audioknigi-club",
+  "version": "1.0.0",
+  "authors": [
+    "neomen"
+  ],
+  "description": "Audioknigi.club Browser Extension",
+  "main": "gulpfile.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  },
+  "private": true
+}
