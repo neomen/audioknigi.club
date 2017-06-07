@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "gulp watch",
-    "build": "gulp dist",
+    "build": "gulp chrome-dist",
     "postinstall": "bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

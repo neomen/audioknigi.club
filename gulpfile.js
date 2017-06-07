@@ -43,8 +43,8 @@ gulp.task('chrome', function() {
 });
 
 gulp.task('chrome-dist', function () {
-	// gulp.src('./build/chrome/**/*')
-	gulp.src('./build/chrome/')
+	gulp.src('./build/chrome/**/*')
+	//gulp.src('./build/chrome/')
 		.pipe(zip('chrome-extension-' + chrome.version + '.zip'))
 		.pipe(gulp.dest('./dist/chrome'));
 });
