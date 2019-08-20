@@ -46,29 +46,27 @@ function getACUrl() {
   return 'https://audioknigi.club/';
 }
 
-function isACUrl(url) {
-  var ymUrl = getACUrl();
-  return url.indexOf(ymUrl) == 0;
-}
-
 function openACInNewTab() {
-  chrome.tabs.create({"url": getACUrl()});
+  chrome.tabs.create({ "url": getACUrl() });
 }
 
 function runScriptOnACTab(scriptFile) {
-  chrome.tabs.getAllInWindow(undefined, function(tabs) {
-    var foundKey = false;
-    for (var i = 0, tab; tab = tabs[i]; i++) {
-      if (tab.url && isACUrl(tab.url)) {
-        chrome.tabs.executeScript(tab.id, {"file": scriptFile});
-        foundKey = true;
-        break;
-      }
-    }
-    if (!foundKey)
+  chrome.tabs.query({}, function (tabs) {
+    var ymUrl = getACUrl();
+    var audioTab = tabs.filter(function (tab) {
+      return tab.url.includes(ymUrl)
+    });
+
+    if (audioTab.length) {
+      chrome.tabs.executeScript(audioTab[0].id, { "file": scriptFile });
+    } else {
       openACInNewTab();
     }
-  );
+
+    if (tab) {
+      openACInNewTab();
+    }
+  });
 }
 //paly of pause
 function playOrPause() {
@@ -114,10 +112,16 @@ function clickTimeout() {
   clickCounter = 0;
 }
 
-chrome.browserAction.onClicked.addListener(function(tab) {
+chrome.browserAction.onClicked.addListener(function (tab) {
   clickHandler();
 });
 
-chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
   updateStatus(request);
+});
+
+chrome.commands.onCommand.addListener(function (command) {
+  if (command === 'toggle-play') {
+    clickHandler();
+  }
 });

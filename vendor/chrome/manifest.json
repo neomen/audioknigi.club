@@ -25,5 +25,14 @@
 	],
 	"background": {
 			"scripts": ["libs/jquery.min.js","background.js"]
+	},
+	"commands": {
+		"toggle-play": {
+			"suggested_key": {
+				"default": "Ctrl+Q"
+			},
+			"description": "Play/Pause",
+			"global": true
+		}
 	}
 }
